@@ -29,6 +29,8 @@ def load_entry_image() -> bytes:
     data = SOURCE.read_bytes()
     if not data:
         raise ValueError(f"entry image is empty: {SOURCE}")
+    if not data.startswith(b"\xff\xd8\xff"):
+        raise ValueError(f"entry image is not a JPEG: {SOURCE}")
     return data
 
 
